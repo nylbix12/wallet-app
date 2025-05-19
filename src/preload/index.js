@@ -1,6 +1,6 @@
-// Ici, tu peux exposer des APIs Electron au frontend (de manière sécurisée)
 import { contextBridge } from 'electron';
 
+// Exemple : Expose une API pour interagir avec le système de fichiers
 contextBridge.exposeInMainWorld('electronAPI', {
-  doThing: () => console.log('Hello from Electron!'),
+  saveKey: (key) => require('fs').writeFileSync('key.txt', key), // À remplacer par un stockage sécurisé !
 });
