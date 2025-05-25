@@ -1,0 +1,148 @@
+## Cahier des charges technique
+
+### Présentation
+
+* **Nom du projet** : Code Wallet
+* **Date** : 25 mai 2025
+* **Développeuse** :Nabila Lounas
+
+### Adresse GitHub
+
+Lien du dépôt : [https://github.com/ton-compte/code-wallet](https://github.com/ton-compte/code-wallet)
+
+### Analyse client
+
+Le projet **Code Wallet** répond à une problématique rencontrée fréquemment par les développeurs : retrouver rapidement des extraits de code utiles, organisés et stockés en local. Le client souhaite une application **desktop** légère, sécurisée, hors ligne, permettant l’ajout, la modification, la suppression et le classement de fragments de code avec des tags personnalisés. L’interface doit être simple, efficace, et permettre un **changement de thème clair/sombre**. L’utilisateur final est un développeur indépendant ou une équipe souhaitant éviter une solution cloud ou complexe.
+
+### Choix technologiques
+
+* **React** : Permet de créer une interface utilisateur interactive et modulaire.
+* **Electron** : Pour transformer l’application React en application desktop multiplateforme (Windows/Mac/Linux).
+* **Styled-components** : Pour la gestion du thème clair/sombre avec des composants stylés dynamiquement.
+* **LocalStorage** : Stockage persistant des données en local, sans backend, simple à utiliser.
+* **React Router** : Navigation fluide entre les différentes vues de l’application.
+* **UUID** : Génération d’identifiants uniques pour chaque fragment de code.
+* **Git + GitHub** : Gestion de version, collaboration et publication du code source.
+
+### Architecture technique
+
+#### Couche présentation
+
+* Composants React : `Header`, `ThemeSwitcher`, `FragmentsList`, `AddFragmentForm`, `About`, `Sidebar`
+
+#### Couche métier
+
+* Ajout, édition et suppression de fragments
+* Filtrage par tags
+* Gestion du thème (light/dark)
+
+#### Couche sécurité
+
+* Formulaires sécurisés (champ obligatoire, empêche soumission vide)
+* Données stockées uniquement en local (pas de transmission sur Internet)
+
+#### Couche données
+
+* Données enregistrées via `localStorage` avec sérialisation JSON
+
+```
+ Schéma :
+  [UI - React] ↔ [Gestionnaire de fragments (state/hooks)] ↔ [localStorage]
+```
+
+### Stratégie de sécurité
+
+* **Formulaires** : Vérification des champs requis (titre, code, tags)
+* **Application** : Pas de traitement serveur, les données restent sur le poste utilisateur
+* **Stockage** : Utilisation du localStorage, pas de stockage cloud
+
+### Déploiement
+
+#### README.md
+
+````md
+# Code Wallet
+
+## Prérequis
+- Node.js
+- Git
+
+## Installation
+```bash
+git clone https://github.com/ton-compte/code-wallet
+cd code-wallet
+npm install
+npm run dev
+````
+
+## Lancer avec Electron
+
+```bash
+npm run electron-dev
+```
+
+```
+
+### Outils utilisés
+- **VS Code** : Développement
+- **Figma** : Maquettes et wireframes
+- **draw.io** : Architecture technique
+- **dbdiagram.io** : Diagramme de base de données
+- **GitHub** : Collaboration/versionnage
+
+### Évaluation du temps de travail
+| Tâche                            | Durée estimée |
+|----------------------------------|----------------|
+| Wireframes + Maquettes          | 1 jour         |
+| Intégration React + UI          | 1,5 jour       |
+| Electron (enrobage app)         | 1 jour         |
+| Ajout/modif/suppression code    | 1 jour         |
+| Gestion tags + recherche        | 1 jour         |
+| Thème sombre/claire             | 0,5 jour       |
+| Recettage                       | 0,5 jour       |
+| Rédaction documentation         | 0,5 jour       |
+
+### Liste fonctionnelle
+- ✅ Ajout d’un fragment de code
+- ✅ Modification d’un fragment
+- ✅ Suppression d’un fragment
+- ✅ Ajout/gestion de tags
+- ✅ Recherche par tag
+- ✅ Thème sombre/clair
+- ✅ Stockage local via localStorage
+- ✅ Interface responsive
+
+### Recettage
+| Fonctionnalité                  | État             |
+|--------------------------------|------------------|
+| Ajout fragment                 | Fonctionnel ✅   |
+| Suppression fragment           | Fonctionnel ✅   |
+| Modification fragment          | Fonctionnel ✅   |
+| Recherche par tag              | Fonctionnel ✅   |
+| Thème sombre/clair             | Fonctionnel ✅   |
+| Stockage persisté              | Fonctionnel ✅   |
+
+### Diagramme ERP
+```
+
+Table: Fragment
+
+* id: UUID (PK)
+* title: string
+* code: string
+* tags: string\[]
+
+```
+Relation : un fragment peut avoir plusieurs tags, stockés en tableau.
+
+### Captures d’écran
+_À insérer : captures de chaque page (Accueil, Ajout, Tags, About), avec et sans mode sombre._
+
+### Wireframes
+_Insérer vos wireframes de chaque page de l'application, réalisés sur Figma ou dessinés._
+
+---
+
+✅ Ce document est prêt pour impression ou conversion en `.doc` / `.pdf`. Veux-tu que je le génère ?
+
+```
